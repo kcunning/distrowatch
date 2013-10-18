@@ -4,6 +4,7 @@ import urllib2
 from distro import *
 
 REQ_URL = "http://git.cmgdigital.com/gitweb.cgi?p=storyville;a=blob_plain;f=requirements.txt;hb=HEAD"
+LIMIT = None
 
 def get_req_file(url=REQ_URL):
     f = open('requirements.txt', 'w')
@@ -87,9 +88,8 @@ def main():
             print "Sorry, there was a problem."
             distros['error'].append(lib)
         counter += 1
-        if counter > 20:
+        if LIMIT and counter > LIMIT:
             break
-            pass
     create_json(distros)
 
 if __name__ == '__main__':
