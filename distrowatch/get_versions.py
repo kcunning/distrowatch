@@ -1,10 +1,14 @@
 import json
 import urllib2
+import sys
 
 from distro import *
 
-REQ_URL = "http://git.cmgdigital.com/gitweb.cgi?p=storyville;a=blob_plain;f=requirements.txt;hb=HEAD"
-LIMIT = None
+try:
+    from settings import *
+except ImportError:
+    print "You need to create a settings file."
+    sys.exit()
 
 def get_req_file(url=REQ_URL):
     f = open('requirements.txt', 'w')
@@ -90,6 +94,7 @@ def main():
         counter += 1
         if LIMIT and counter > LIMIT:
             break
+
     create_json(distros)
 
 if __name__ == '__main__':

@@ -1,3 +1,7 @@
+''' Stolen shamelessly from an anonymous person on the internet.
+    http://pastebin.com/axzdUQhZ
+'''
+
 import posixpath
 import pkg_resources
 import sys
