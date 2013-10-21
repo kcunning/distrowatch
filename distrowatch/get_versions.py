@@ -45,6 +45,10 @@ def get_versions(lib, version):
     return versions
 
 def check_lib(current, latest):
+    ''' Given two versions, stored in a string, returns how behind the current 
+        version is behind the latest version. Assumes a standard format of 
+        #.#.# (major.minor.bug).
+    '''
     current = current.strip().split('.')
     latest = latest.split('.')
     if current[0] < latest[0]:
@@ -62,6 +66,8 @@ def check_lib(current, latest):
     return "none"
 
 def create_json(distros):
+    ''' Creates the json file from a dictionary of distrobutions
+    '''
     f = open("distros.json", "w")
     json.dump(distros, f, indent=4)
     f.close()
@@ -74,9 +80,13 @@ def main():
            'bug': [],
                'minor': [],
                'major': [],
-           'error': []}
+           'error': [],
+           'local': []}
 
     for lib, version in libs.items():
+        if lib in LOCAL:
+            distros['local'].append(lib)
+            continue
         version = version.strip()
         versions = get_versions(lib, version)
         print lib
